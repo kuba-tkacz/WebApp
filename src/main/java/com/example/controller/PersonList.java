@@ -16,7 +16,6 @@ import java.util.List;
 @Controller
 public class PersonList {
 
-    // poniżej wstrzykujemy poprzez konstruktor
     private final PersonRepository personRepository;
     private final PersonService personService;
 
@@ -25,7 +24,6 @@ public class PersonList {
         this.personService = personService;
     }
 
-    // get all person
     @RequestMapping(value = {"/personList"}, method = RequestMethod.GET)
     public String getPersonList(Model model) {
         List<Person> list = personRepository.findAll();
@@ -33,21 +31,16 @@ public class PersonList {
         return "persons/personList";
     }
 
-
-    // only get view add new person
     @RequestMapping(value = {"/addNewPerson"}, method = RequestMethod.GET)
     public String getAddNewPerson() {
         return "persons/addNewPerson";
     }
 
-
-    // save person in database
     @RequestMapping(value = {"/addNewPerson"}, method = RequestMethod.POST)
     public RedirectView postAddNewPerson(@ModelAttribute Person newPerson) {
         personRepository.save(newPerson);
         return new RedirectView("/personList");
     }
-
 
     @RequestMapping(value = {"/editPerson/{id}"}, method = RequestMethod.GET)
     public String getEditPerson(@PathVariable("id") Long id, Model model) {
@@ -55,13 +48,11 @@ public class PersonList {
         return "persons/editPerson";
     }
 
-
     @RequestMapping(value = {"/personList/{id}"}, method = RequestMethod.POST)
     public RedirectView getEditPerson(@PathVariable("id") Long id, @ModelAttribute Person newPerson) {
         personRepository.save(newPerson);
         return new RedirectView("/editPerson/{id}");
     }
-
 
     @RequestMapping(value = {"/editPerson/{id}"}, method = RequestMethod.POST)
     public RedirectView getEditPerson(@PathVariable("id") Long id) {

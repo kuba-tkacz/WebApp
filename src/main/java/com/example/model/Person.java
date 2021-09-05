@@ -1,10 +1,6 @@
 package com.example.model;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.util.HashSet;
 import java.util.Set;
 
